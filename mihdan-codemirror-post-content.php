@@ -44,7 +44,8 @@ add_action( 'admin_enqueue_scripts', function () {
 //		'bothTags' => true,
 //	);
 
-	$settings['codemirror']['mode'] = 'text/html';
+	//$settings['codemirror']['inputStyle'] = "textarea";
+	$settings['codemirror']['mode'] = "text/html";
 	$settings['codemirror']['markTagPairs'] = true;
 	$settings['codemirror']['autoRenameTags'] = true;
 	$settings['codemirror']['tabSize'] = 4;
@@ -52,6 +53,20 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	$settings['codemirror']['extraKeys']['Tab'] = 'emmetExpandAbbreviation';
 	$settings['codemirror']['extraKeys']['Enter'] = 'emmetInsertLineBreak';
+	$settings['codemirror']['extraKeys']['Ctrl-Alt-A'] = 'emmetW';
+
+	/**
+	 * As noted above, CodeMirror and its bundled modes and add-ons are registered in a wp-codemirror script handle.
+	 * Also important to note here that this script does not define a global CodeMirror object
+	 * but rather a wp.CodeMirror one. This ensures that other plugins that may be including other CodeMirror
+	 * bundles won’t have conflicts. This also means that if you do want to include fortran.js from CodeMirror,
+	 * that you’ll need to bundle it to call wp.CodeMirror.defineMode() instead of CodeMirror.defineMode().
+	 * A workaround for having to do this would be the following, but be aware of potential conflicts:
+	 */
+	wp_add_inline_script(
+		'wp-codemirror',
+		'window.CodeMirror = wp.CodeMirror;'
+	);
 
 	//print_r( $settings );die;
 
