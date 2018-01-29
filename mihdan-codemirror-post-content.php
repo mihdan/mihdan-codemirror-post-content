@@ -63,10 +63,10 @@ add_action( 'admin_enqueue_scripts', function () {
 	 * that you’ll need to bundle it to call wp.CodeMirror.defineMode() instead of CodeMirror.defineMode().
 	 * A workaround for having to do this would be the following, but be aware of potential conflicts:
 	 */
-	wp_add_inline_script(
-		'wp-codemirror',
-		'window.CodeMirror = wp.CodeMirror;'
-	);
+//	wp_add_inline_script(
+//		'wp-codemirror__',
+//		'window.CodeMirror = wp.CodeMirror;'
+//	);
 
 	//print_r( $settings );die;
 
