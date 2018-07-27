@@ -1,6 +1,12 @@
 <?php
 /**
  * Plugin Name: Mihdan: CodeMirror For Post Content
+ * Description: WordPress-плагин, добавляющий редактор из ядра с подсветкой кода на экран создания/редактирования поста
+ * Version: 1.0.1
+ * Plugin URI: https://www.kobzarev.com
+ * Author: Mikhail Kobzarev
+ * Author URI: https://www.kobzarev.com
+ * GitHub Plugin URI: https://github.com/mihdan/mihdan-codemirror-post-content
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -65,7 +71,7 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	wp_add_inline_style(
 		'wp-codemirror',
-		'.CodeMirror { height: 100%; }'
+		'.CodeMirror { height: 800px; }'
 	);
 } );
 
