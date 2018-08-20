@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Mihdan: CodeMirror For Post Content
  * Description: WordPress-плагин, добавляющий редактор из ядра с подсветкой кода на экран создания/редактирования поста
- * Version: 1.0.1
+ * Version: 1.0.2
  * Plugin URI: https://www.kobzarev.com
  * Author: Mikhail Kobzarev
  * Author URI: https://www.kobzarev.com
@@ -13,8 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+add_action( 'admin_notices', function () {
+	?>
+	<?php if ( get_user_option( 'rich_editing' ) === 'true' ) : ?>
+		<div class="notice notice-warning is-dismissible">
+			<p><b>CodeMirror For Post Content:</b> для правильной работы плагина необходимо отключить визуальный редактор для записей в вашем <a href="<?php echo get_edit_profile_url(); ?>">профиле</a>.</p>
+		</div>
+	<?php endif; ?>
+	<?php
+} );
+
 add_action( 'admin_enqueue_scripts', function () {
 	if ( ! in_array( get_current_screen()->id, array( 'post', 'page' ) ) ) {
+		return;
+	}
+
+	if ( get_user_option( 'rich_editing' ) === 'true' ) {
 		return;
 	}
 
@@ -71,8 +85,21 @@ add_action( 'admin_enqueue_scripts', function () {
 
 	wp_add_inline_style(
 		'wp-codemirror',
-		'.CodeMirror { height: 800px; }'
+		'.CodeMirror { height: 800px; margin-top: 37px; }'
 	);
+} );
+
+add_action( 'admin_print_footer_scripts', function () {
+	if ( ! wp_script_is( 'quicktags' ) ) {
+		return;
+	}
+	?>
+	<script type="text/javascript">
+		QTags.addButton( 'mcpc_css', 'CSS', '[css]', '[/css]', 'p', 'Подсветка CSS синтаксиса', 100 );
+		QTags.addButton( 'mcpc_html', 'HTML', '[html]', '[/html]', 'p', 'Подсветка HTML синтаксиса', 101 );
+		QTags.addButton( 'mcpc_php', 'PHP', '[php]', '[/php]', 'p', 'Подсветка PHP синтаксиса', 102 );
+	</script>
+	<?php
 } );
 
 // eof;
