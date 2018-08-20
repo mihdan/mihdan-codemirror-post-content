@@ -94,6 +94,8 @@ add_action( 'admin_print_footer_scripts', function () {
 		QTags.addButton( 'mcpc_css', 'CSS', '[css]', '[/css]', 'p', 'Подсветка CSS синтаксиса', 100 );
 		QTags.addButton( 'mcpc_html', 'HTML', '[html]', '[/html]', 'p', 'Подсветка HTML синтаксиса', 101 );
 		QTags.addButton( 'mcpc_php', 'PHP', '[php]', '[/php]', 'p', 'Подсветка PHP синтаксиса', 102 );
+		QTags.addButton( 'mcpc_bash', 'BASH', '[bash]', '[/bash]', 'p', 'Подсветка Bash синтаксиса', 103 );
+		QTags.addButton( 'mcpc_code', 'CODE', '[code]', '[/code]', 'p', 'Подсветка синтаксиса', 104 );
 	</script>
 	<?php
 } );
